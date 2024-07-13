@@ -43,26 +43,5 @@
           '';
         };
       });
-
-      packages = forEachSupportedSystem ({ pkgs }: {
-        default = pkgs.stdenv.mkDerivation {
-          pname = "WeBridge";
-
-          src = ~/OpenJDK-Concolic-Execution-Engine;
-
-          nativeBuildInputs = [
-            pkgs.gcc6
-          ];
-
-          buildPhase = ''
-            ./scripts/install_dependencies.sh || exit
-            ./scripts/configure.sh || exit
-            make all -j CONF=linux-x86_64-normal-zero-release || exit
-            rm -rf ~/webridge || exit
-            cp -r ./build/linux-x86_64-normal-zero-release/images/j2sdk-image ~ || exit
-            mv ~/j2sdk-image webridge || exit
-          '';
-        };
-      });
     };
 }

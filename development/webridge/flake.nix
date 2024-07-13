@@ -36,16 +36,26 @@
             export PATH="~/webridge/bin:$PATH"
           '';
         };
+
+        jdk = pkgs.mkShell {
+          packages = with pkgs; [
+            gcc6
+          ];
+
+          shellHook = ''
+            gcc --version
+          '';
+        };
       });
 
       packages = forEachSupportedSystem ({ pkgs }: {
         default = pkgs.stdenv.mkDerivation {
           pname = "WeBridge";
 
-          src = ~/OpenJDK-Concolic-Execution-Engine;
+          src = ./.;
 
           nativeBuildInputs = [
-            gcc6
+            pkgs.gcc6
           ];
 
           buildPhase = ''
@@ -55,7 +65,7 @@
             rm -rf ~/webridge
             cp -r ./build/linux-x86_64-normal-zero-release/images/j2sdk-image ~
             mv ~/j2sdk-image webridge
-          ''
+          '';
         };
       });
     };

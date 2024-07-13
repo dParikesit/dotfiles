@@ -48,7 +48,7 @@
         default = pkgs.stdenv.mkDerivation {
           pname = "WeBridge";
 
-          src = ./.;
+          src = ~/OpenJDK-Concolic-Execution-Engine;
 
           nativeBuildInputs = [
             pkgs.gcc6

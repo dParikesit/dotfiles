@@ -1,3 +1,4 @@
+# home-manager switch --flake ~/dotfiles
 {
   description = "Home Manager configuration of dimas";
 

@@ -36,6 +36,7 @@
         jdk = pkgs.mkShell {
           packages = with pkgs; [
             gcc6
+            zip
           ];
 
           shellHook = ''

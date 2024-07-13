@@ -16,7 +16,7 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
     in {
-      homeConfigurations."$USER" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."dimas" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
         # Specify your home configuration modules here, for example,

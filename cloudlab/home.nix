@@ -3,8 +3,8 @@
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "$USER$";
-  home.homeDirectory = "$HOME";
+  home.username = "dimas";
+  home.homeDirectory = "/users/dimas";
 
   home.stateVersion = "24.05"; # Please read the comment before changing.
 

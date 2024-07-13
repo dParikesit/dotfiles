@@ -5,10 +5,6 @@
 {
   description = "A Nix-flake-based Java development environment";
 
-  inputs = {
-    nixpkgs.follows = "nixpkgs";
-  };
-
   outputs = { self, nixpkgs }:
     let
       javaVersion = 8; # Change this value to update the whole stack
@@ -59,12 +55,12 @@
           ];
 
           buildPhase = ''
-            ./scripts/install_dependencies.sh
-            ./scripts/configure.sh
-            make all -j CONF=linux-x86_64-normal-zero-release
-            rm -rf ~/webridge
-            cp -r ./build/linux-x86_64-normal-zero-release/images/j2sdk-image ~
-            mv ~/j2sdk-image webridge
+            ./scripts/install_dependencies.sh || exit
+            ./scripts/configure.sh || exit
+            make all -j CONF=linux-x86_64-normal-zero-release || exit
+            rm -rf ~/webridge || exit
+            cp -r ./build/linux-x86_64-normal-zero-release/images/j2sdk-image ~ || exit
+            mv ~/j2sdk-image webridge || exit
           '';
         };
       });

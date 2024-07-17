@@ -1,6 +1,6 @@
 # nix build -L .#jdk
 # nix develop --build
-# nix develop
+# nix develop .#jdk
 
 {
   description = "A Nix-flake-based Java development environment";
@@ -18,13 +18,6 @@
       forEachSupportedSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f {
         pkgs = import nixpkgs { inherit overlays system; };
       });
-
-      xorgLibs = with pkgs.xorg; [
-        libICE
-        libSM
-        libX11
-        libX11.dev
-      ];
     in
     {
       devShells = forEachSupportedSystem ({ pkgs }: {
@@ -44,11 +37,54 @@
           packages = with pkgs; [
             gcc6
             zip
-          ] ++ xorgLibs;
+            cpio
+            file
+            which
+            perl
+            zlib
+            cups
+            freetype
+            alsa-lib
+            libjpeg
+            giflib
+            xorg.libX11
+            xorg.libX11.dev
+            xorg.libICE
+            xorg.libXext
+            xorg.libXrender
+            xorg.libXtst
+            xorg.libXt 
+            xorg.libXtst
+            xorg.libXi
+            xorg.libXinerama
+            xorg.libXcursor
+            xorg.libXrandr
+            fontconfig
+            openjdk8-bootstrap
+            libffi
+          ];
 
           shellHook = ''
             gcc --version
-            LD_LIBRARY_PATH = "${lib.makeLibraryPath xorgLibs}";
+            export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${
+              with pkgs;
+              lib.makeLibraryPath [
+                libGL
+                xorg.libX11
+                xorg.libX11.dev
+                xorg.libICE
+                xorg.libXext
+                xorg.libXrender
+                xorg.libXtst
+                xorg.libXt 
+                xorg.libXtst
+                xorg.libXi
+                xorg.libXinerama
+                xorg.libXcursor
+                xorg.libXrandr
+                libffi
+              ]
+            }"
           '';
         };
       });

@@ -18,6 +18,13 @@
       forEachSupportedSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f {
         pkgs = import nixpkgs { inherit overlays system; };
       });
+
+      xorgLibs = with pkgs.xorg; [
+        libICE
+        libSM
+        libX11
+        libX11.dev
+      ];
     in
     {
       devShells = forEachSupportedSystem ({ pkgs }: {
@@ -37,10 +44,11 @@
           packages = with pkgs; [
             gcc6
             zip
-          ];
+          ] ++ xorgLibs;
 
           shellHook = ''
             gcc --version
+            LD_LIBRARY_PATH = "${lib.makeLibraryPath xorgLibs}";
           '';
         };
       });

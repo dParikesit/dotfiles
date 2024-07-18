@@ -28,8 +28,8 @@
           ];
 
           shellHook = ''
-            export JAVA_HOME="~/webridge"
-            export PATH="~/webridge/bin:$PATH"
+            export JAVA_HOME="/users/dimas/OpenJDK-Concolic-Execution-Engine/build/linux-x86_64-normal-zero-release/images/j2sdk-image"
+            export PATH="/users/dimas/OpenJDK-Concolic-Execution-Engine/build/linux-x86_64-normal-zero-release/images/j2sdk-image/bin:$PATH"
           '';
         };
 

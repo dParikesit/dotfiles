@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, javaVersion, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -8,10 +8,16 @@
 
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
+  nixpkgs.overlays = [
+    (final: prev: rec {
+      jdk = prev."jdk${toString javaVersion}";
+    })
+  ];
+
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [
-
+  home.packages = with pkgs; [
+    leiningen
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

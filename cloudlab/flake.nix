@@ -26,7 +26,7 @@
         # to pass through arguments to home.nix
         extraSpecialArgs = {
           javaVersion = 8;
-        }
+        };
       };
     };
 }

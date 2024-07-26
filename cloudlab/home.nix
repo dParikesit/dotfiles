@@ -53,7 +53,6 @@
     fzf.enable = true;
     git.enable = true;
     man.enable = true;
-    mise.enable = true;
     ripgrep.enable = true;
     ssh.enable = true;
     tealdeer.enable = true;

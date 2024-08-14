@@ -18,7 +18,7 @@
   # environment.
   home.packages = with pkgs; [
     leiningen
-    rustup
+    # rustup
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -54,19 +54,19 @@
     fzf.enable = true;
     git.enable = true;
     man.enable = true;
-    mise = {
-      enable = true;
-      enableBashIntegration = true;
-      globalConfig = {
-        tools = {
-          node = "lts";
-          python = ["latest"];
-        };
-      };
-      settings = {
-        experimental = true;
-      };
-    };
+    # mise = {
+    #   enable = true;
+    #   enableBashIntegration = true;
+    #   globalConfig = {
+    #     tools = {
+    #       node = "lts";
+    #       python = ["latest"];
+    #     };
+    #   };
+    #   settings = {
+    #     experimental = true;
+    #   };
+    # };
     ripgrep.enable = true;
     ssh.enable = true;
     tealdeer.enable = true;

@@ -57,15 +57,15 @@
     mise = {
       enable = true;
       enableBashIntegration = true;
-      globalConfig = ''
+      globalConfig = {
         tools = {
           node = "lts";
           python = ["latest"];
         };
-      '';
-      settings = ''
+      };
+      settings = {
         experimental = true;
-      '';
+      };
     };
     ripgrep.enable = true;
     ssh.enable = true;

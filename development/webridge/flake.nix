@@ -1,3 +1,4 @@
+# nix build .#jdk.x86_64-linux.default
 # nix build -L .#jdk
 # nix develop --build
 # nix develop .#jdk

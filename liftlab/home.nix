@@ -3,8 +3,8 @@
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "dimas";
-  home.homeDirectory = "/users/dimas";
+  home.username = "vqx2dc";
+  home.homeDirectory = "/u/vqx2dc";
 
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
@@ -17,7 +17,7 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    leiningen
+    # leiningen
     # rustup
   ];
 
@@ -43,7 +43,7 @@
   programs = {
     home-manager.enable = true; # Let Home Manager install and manage itself.
     bat.enable = true;
-    bottom.enable = true;
+    btop.enable = true;
     direnv = {
       enable = true;
       enableBashIntegration = true; # see note on other shells below
@@ -52,25 +52,26 @@
     eza.enable = true;
     fd.enable = true;
     fzf.enable = true;
-    programs.git = {
+    git = {
       enable = true;
       userEmail = "dsparikesit@gmail.com";
       userName = "dParikesit";
     };
+    lazygit.enable = true;
     man.enable = true;
-    # mise = {
-    #   enable = true;
-    #   enableBashIntegration = true;
-    #   globalConfig = {
-    #     tools = {
-    #       node = "lts";
-    #       python = ["latest"];
-    #     };
-    #   };
-    #   settings = {
-    #     experimental = true;
-    #   };
-    # };
+    mise = {
+      enable = true;
+      enableBashIntegration = true;
+      globalConfig = {
+        tools = {
+          # node = "lts";
+          # python = ["latest"];
+        };
+      };
+      settings = {
+        experimental = true;
+      };
+    };
     ripgrep.enable = true;
     ssh.enable = true;
     tealdeer.enable = true;

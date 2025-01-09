@@ -22,7 +22,7 @@
     in
     {
       devShells = forEachSupportedSystem ({ pkgs }: {
-        default = mkShell {
+        default = pkgs.mkShell {
           packages = with pkgs; [
             ant
             maven

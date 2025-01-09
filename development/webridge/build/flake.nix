@@ -1,12 +1,12 @@
-# nix build .#jdk.x86_64-linux.default
-# nix build -L .#jdk
-# nix develop --build
-# nix develop .#jdk
+# nix develop
 
 {
   description = "A Nix-flake-based Java development environment";
 
-  outputs = { self, nixpkgs }:
+  inputs = {
+    nixpkgs2405.url = "github:nixos/nixpkgs/b134951a4c9f3c995fd7be05f3243f8ecd65d798";
+  };
+  outputs = { self, nixpkgs2405 }:
     let
       javaVersion = 8; # Change this value to update the whole stack
       overlays = [
@@ -18,25 +18,13 @@
       supportedSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
       forEachSupportedSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f {
         pkgs = import nixpkgs { inherit overlays system; };
+        pkgs2405 = import nixpkgs2405 { inherit overlays system; };
       });
     in
     {
-      devShells = forEachSupportedSystem ({ pkgs }: {
-        default = pkgs.mkShell {
-          packages = with pkgs; [
-            ant
-            maven
-          ];
-
-          shellHook = ''
-            export JAVA_HOME="/users/dimas/OpenJDK-Concolic-Execution-Engine/build/linux-x86_64-normal-zero-release/images/j2sdk-image"
-            export PATH="/users/dimas/OpenJDK-Concolic-Execution-Engine/build/linux-x86_64-normal-zero-release/images/j2sdk-image/bin:$PATH"
-          '';
-        };
-
-        jdk = pkgs.mkShell {
-          packages = with pkgs; [
-            gcc6
+      devShells = forEachSupportedSystem ({ pkgs, pkgs2405 }: {
+        default = pkgs2405.mkShell {
+          packages = with pkgs2405; [
             zip
             cpio
             file
@@ -63,12 +51,14 @@
             fontconfig
             openjdk8-bootstrap
             libffi
+          ] ++ [
+            pkgs2405.gcc6
           ];
 
           shellHook = ''
             gcc --version
             export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${
-              with pkgs;
+              with pkgs2405;
               lib.makeLibraryPath [
                 libGL
                 xorg.libX11

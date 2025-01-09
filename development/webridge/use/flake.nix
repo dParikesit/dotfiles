@@ -6,7 +6,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   };
-  outputs = { self, nixpkgs, nixpkgs2405 }:
+  outputs = { self, nixpkgs }:
     let
       javaVersion = 8; # Change this value to update the whole stack
       overlays = [

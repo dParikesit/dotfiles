@@ -3,6 +3,9 @@
 {
   description = "A Nix-flake-based Java development environment";
 
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+  };
   outputs = { self, nixpkgs, nixpkgs2405 }:
     let
       javaVersion = 8; # Change this value to update the whole stack
@@ -15,7 +18,6 @@
       supportedSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
       forEachSupportedSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f {
         pkgs = import nixpkgs { inherit overlays system; };
-        pkgs2405 = import nixpkgs2405 { inherit overlays system; };
       });
     in
     {
@@ -31,6 +33,6 @@
             export PATH="/localtmp/concolic/webridge/build/linux-x86_64-normal-zero-release/images/j2sdk-image/bin:$PATH"
           '';
         };
-      };
-    });
+      });
+    };
 };

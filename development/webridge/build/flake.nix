@@ -4,9 +4,10 @@
   description = "A Nix-flake-based Java development environment";
 
   inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs2405.url = "github:nixos/nixpkgs/b134951a4c9f3c995fd7be05f3243f8ecd65d798";
   };
-  outputs = { self, nixpkgs2405 }:
+  outputs = { self, nixpkgs, nixpkgs2405 }:
     let
       javaVersion = 8; # Change this value to update the whole stack
       overlays = [

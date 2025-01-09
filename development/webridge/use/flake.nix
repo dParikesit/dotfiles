@@ -8,12 +8,7 @@
   };
   outputs = { self, nixpkgs }:
     let
-      javaVersion = 8; # Change this value to update the whole stack
       overlays = [
-        (final: prev: rec {
-          jdk = prev."jdk${toString javaVersion}";
-          maven = prev.maven.override { inherit jdk; };
-        })
       ];
       supportedSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
       forEachSupportedSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f {

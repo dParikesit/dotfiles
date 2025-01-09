@@ -31,7 +31,6 @@
             export PATH="/localtmp/concolic/webridge/build/linux-x86_64-normal-zero-release/images/j2sdk-image/bin:$PATH"
           '';
         };
-        };
-      });
-    };
-}
+      };
+    });
+};
